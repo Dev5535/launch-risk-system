@@ -33,7 +33,8 @@ with col1:
     *   Executive Sign-off Dashboard
     *   **30-Day Data Retention**
     """)
-    st.button("Request Invoice (Single Launch)", use_container_width=True)
+    # Button removed as per request
+
 
 with col2:
     st.markdown("#### 🌍 Enterprise Annual License")
@@ -45,7 +46,8 @@ with col2:
     *   API Access for CI/CD Integration
     *   **Permanent Data Retention**
     """)
-    st.button("Contact Sales for Enterprise", use_container_width=True)
+    # Button removed as per request
+
 
 st.markdown("---")
 st.markdown("### 🛡️ Payment Security")
