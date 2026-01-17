@@ -1,0 +1,44 @@
+{
+  "summary": {
+    "missing": 1,
+    "new": 1,
+    "modified": 1,
+    "metadata_mismatch": 1,
+    "errors": 0
+  },
+  "details": [
+    {
+      "type": "MODIFIED",
+      "path": "config.json",
+      "description": "Content differs between source and target",
+      "severity": "Medium",
+      "details": "{'database': {'old': 'mysql', 'new': 'postgres'}, 'version': {'old': '1.0', 'new': '2.0'}}"
+    },
+    {
+      "type": "METADATA_MISMATCH",
+      "path": "config.json",
+      "description": "Metadata configuration drift detected",
+      "severity": "Medium",
+      "details": "{'size': {'old': 54, 'new': 57}}"
+    },
+    {
+      "type": "MISSING",
+      "path": "legacy_script.js",
+      "description": "Asset exists in source but missing in target",
+      "severity": "High",
+      "details": null
+    },
+    {
+      "type": "NEW",
+      "path": "new_feature.js",
+      "description": "New asset found in target",
+      "severity": "Low",
+      "details": null
+    }
+  ],
+  "meta": {
+    "timestamp": 1767978461.0256374,
+    "source": "C:\\Users\\devsh\\OneDrive\\Desktop\\high income potential software sellables\\launch risk intelligense system\\product_1_digital_twin_auditor\\tests\\test_data\\source",
+    "target": "C:\\Users\\devsh\\OneDrive\\Desktop\\high income potential software sellables\\launch risk intelligense system\\product_1_digital_twin_auditor\\tests\\test_data\\target"
+  }
+}

@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: riskintelligentsystem
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run web_ui/Home.py --server.port $PORT --server.address 0.0.0.0
+    plan: free
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.0

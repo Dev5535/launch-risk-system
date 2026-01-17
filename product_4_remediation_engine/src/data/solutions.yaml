@@ -1,0 +1,122 @@
+# Remediation Database
+# Maps Issue IDs or Pattern Keys to Remediation Steps
+
+# --- Product 1: Digital Twin Auditor (Drift/Mismatches) ---
+DRIFT-FILE-MISSING:
+  title: "File Missing in Production"
+  type: "command"
+  lang: "bash"
+  content: |
+    # Copy the missing file from staging to production
+    cp {{staging_path}} {{prod_path}}
+    # Verify permissions
+    chmod 644 {{prod_path}}
+
+DRIFT-CONTENT-MISMATCH:
+  title: "Content Mismatch Detected"
+  type: "instruction"
+  content: |
+    1. Diff the files to see specific changes:
+       diff {{staging_path}} {{prod_path}}
+    2. If Staging is the source of truth, overwrite Production:
+       cp {{staging_path}} {{prod_path}}
+    3. Restart the service if this is a config file.
+
+# --- Product 2: Risk Audit Engine (SEO, Security, PII) ---
+SEO-MISSING-TITLE:
+  title: "Missing Page Title"
+  type: "code"
+  lang: "html"
+  content: |
+    <head>
+      <title>Your Descriptive Page Title Here</title>
+    </head>
+
+SEC-AWS-KEY:
+  title: "AWS Access Key Exposed"
+  type: "workflow"
+  content: |
+    URGENT ACTION REQUIRED:
+    1. Log into AWS IAM Console immediately.
+    2. Deactivate the exposed Access Key ID: {{match_content}}
+    3. Delete the key after verifying no critical services break (or rotate immediately).
+    4. Scan your git history to remove the secret:
+       git filter-branch --force --index-filter "git rm --cached --ignore-unmatch {{file_path}}" --prune-empty --tag-name-filter cat -- --all
+    5. Force push changes (Be careful with shared branches).
+
+PII-EMAIL-EXPOSED:
+  title: "Potential Email Leak in Code"
+  type: "instruction"
+  content: |
+    Hardcoded email addresses are a privacy risk and spam magnet.
+    Action: Move '{{match_content}}' to an environment variable or database configuration.
+
+# --- Product 3: Compliance Mapper (Regulatory Gaps) ---
+GDPR-1: # Right to be Forgotten
+  title: "Implement 'Right to be Forgotten'"
+  type: "code"
+  lang: "python"
+  content: |
+    # Example Flask/SQLAlchemy implementation
+    @app.route('/api/user/delete', methods=['POST'])
+    def delete_user():
+        user_id = current_user.id
+        # Anonymize instead of hard delete if audit logs are needed
+        user = User.query.get(user_id)
+        user.email = f"deleted_{user.id}@anonymized.com"
+        user.name = "Deleted User"
+        user.data = None
+        db.session.commit()
+        return jsonify({"status": "User data anonymized"}), 200
+
+HIPAA-1: # Encryption
+  title: "Enforce Encryption (At Rest/Transit)"
+  type: "config"
+  lang: "yaml"
+  content: |
+    # Database Configuration (Example for Postgres/RDS)
+    storage_encrypted: true
+    kms_key_id: "arn:aws:kms:us-east-1:123456789012:key/..."
+    
+    # Web Server (Nginx) - Force TLS 1.2+
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+
+SOC2-2: # Change Management
+  title: "Enforce Pull Request Reviews"
+  type: "instruction"
+  content: |
+    1. Go to GitHub/GitLab Repository Settings.
+    2. Select "Branches" -> "Branch Protection Rules".
+    3. Check "Require pull request reviews before merging".
+    4. Set "Required approving reviews" to at least 1.
+
+# --- No-Code Templates (Product 4 Enhancement) ---
+TEMPLATE-S3-PUBLIC:
+  title: "Block Public Access (S3 Bucket)"
+  type: "code"
+  lang: "json"
+  content: |
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Sid": "PublicReadGetObject",
+          "Effect": "Deny",
+          "Principal": "*",
+          "Action": "s3:GetObject",
+          "Resource": "arn:aws:s3:::YOUR-BUCKET-NAME/*"
+        }
+      ]
+    }
+
+TEMPLATE-NGINX-SECURE:
+  title: "Secure Nginx Headers"
+  type: "code"
+  lang: "nginx"
+  content: |
+    add_header X-Frame-Options "SAMEORIGIN";
+    add_header X-XSS-Protection "1; mode=block";
+    add_header X-Content-Type-Options "nosniff";
+    add_header Referrer-Policy "strict-origin-when-cross-origin";
+    add_header Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline';";

@@ -1,0 +1,83 @@
+# GDPR Baseline
+GDPR:
+  description: "General Data Protection Regulation (EU)"
+  triggers:
+    region: ["EU", "Global"]
+    data_types: ["PII", "Financial", "Health"]
+  requirements:
+    - id: "GDPR-1"
+      title: "Right to be Forgotten"
+      description: "Users must be able to request deletion of all their data."
+      action: "Implement a 'Delete Account' feature that wipes database records."
+      priority: "High"
+      mappings: ["CCPA-1", "LGPD-1"]
+    - id: "GDPR-2"
+      title: "Data Portability"
+      description: "Users must be able to download their data."
+      action: "Build a 'Export Data' function (JSON/CSV download)."
+      priority: "Medium"
+      mappings: ["CCPA-2"]
+    - id: "GDPR-3"
+      title: "Consent Management"
+      description: "Explicit consent required for tracking."
+      action: "Add a cookie banner with 'Reject All' option."
+      priority: "High"
+      mappings: ["ePrivacy-1"]
+
+# HIPAA Baseline
+HIPAA:
+  description: "Health Insurance Portability and Accountability Act (US)"
+  triggers:
+    industry: ["Healthcare"]
+    data_types: ["Health"]
+  requirements:
+    - id: "HIPAA-1"
+      title: "PHI Encryption"
+      description: "Protected Health Information must be encrypted at rest and in transit."
+      action: "Enable AES-256 for DB and enforce TLS 1.2+."
+      priority: "Critical"
+      mappings: ["ISO-A.10", "NIST-SC-13"]
+    - id: "HIPAA-2"
+      title: "Access Logging"
+      description: "All access to PHI must be logged."
+      action: "Implement comprehensive audit logs for all data access."
+      priority: "High"
+      mappings: ["SOC2-A1.2", "ISO-A.12.4"]
+
+# SOC 2 Baseline
+SOC2:
+  description: "Service Organization Control 2"
+  triggers:
+    industry: ["SaaS", "Finance", "B2B"]
+  requirements:
+    - id: "SOC2-1"
+      title: "Incident Response Plan"
+      description: "Documented procedure for security incidents."
+      action: "Create and test an Incident Response Plan."
+      priority: "Medium"
+      mappings: ["ISO-A.16.1", "NIST-IR-4"]
+    - id: "SOC2-2"
+      title: "Change Management"
+      description: "Changes to production must be reviewed."
+      action: "Enforce Pull Request reviews and CI/CD pipelines."
+      priority: "High"
+      mappings: ["ISO-A.12.1.2", "NIST-CM-3"]
+
+# ISO 27001 Baseline
+ISO27001:
+  description: "Information Security Management"
+  triggers:
+    industry: ["Enterprise", "Finance", "Government"]
+  requirements:
+    - id: "ISO-1"
+      title: "Asset Inventory"
+      description: "Maintain an inventory of all information assets."
+      action: "Create a dynamic list of all servers, DBs, and repositories."
+      priority: "Low"
+      mappings: ["SOC2-CC6.1", "NIST-CM-8"]
+    - id: "ISO-2"
+      title: "Access Control Policy"
+      description: "Limit access to information and information processing facilities."
+      action: "Implement Role-Based Access Control (RBAC)."
+      priority: "High"
+      mappings: ["SOC2-CC6.1", "NIST-AC-2"]

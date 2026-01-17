@@ -1,0 +1,58 @@
+{
+  "summary": {
+    "Critical": 1,
+    "High": 1,
+    "Medium": 3,
+    "Low": 1
+  },
+  "findings": [
+    {
+      "category": "Security",
+      "severity": "Critical",
+      "description": "Exposed AWS Access Key",
+      "evidence": "Secret pattern match found in content",
+      "location": "C:\\Users\\devsh\\OneDrive\\Desktop\\high income potential software sellables\\launch risk intelligense system\\product_2_risk_audit_engine\\tests\\test_site\\config.js",
+      "timestamp": "2026-01-09T17:26:46.185057"
+    },
+    {
+      "category": "SEO",
+      "severity": "High",
+      "description": "Missing H1 Tag",
+      "evidence": "Page content should have a main heading",
+      "location": "C:\\Users\\devsh\\OneDrive\\Desktop\\high income potential software sellables\\launch risk intelligense system\\product_2_risk_audit_engine\\tests\\test_site\\index.html",
+      "timestamp": "2026-01-09T17:26:46.185564"
+    },
+    {
+      "category": "SEO",
+      "severity": "Medium",
+      "description": "Missing Title Tag",
+      "evidence": "Page has no <title>",
+      "location": "C:\\Users\\devsh\\OneDrive\\Desktop\\high income potential software sellables\\launch risk intelligense system\\product_2_risk_audit_engine\\tests\\test_site\\index.html",
+      "timestamp": "2026-01-09T17:26:46.185564"
+    },
+    {
+      "category": "SEO",
+      "severity": "Medium",
+      "description": "Missing Meta Description",
+      "evidence": "Page has no meta description",
+      "location": "C:\\Users\\devsh\\OneDrive\\Desktop\\high income potential software sellables\\launch risk intelligense system\\product_2_risk_audit_engine\\tests\\test_site\\index.html",
+      "timestamp": "2026-01-09T17:26:46.185564"
+    },
+    {
+      "category": "Stability",
+      "severity": "Medium",
+      "description": "Unpinned Python Dependencies",
+      "evidence": "Found 1 unpinned libs (e.g., flask)",
+      "location": "C:\\Users\\devsh\\OneDrive\\Desktop\\high income potential software sellables\\launch risk intelligense system\\product_2_risk_audit_engine\\tests\\test_site\\requirements.txt",
+      "timestamp": "2026-01-09T17:26:46.185564"
+    },
+    {
+      "category": "Compliance",
+      "severity": "Low",
+      "description": "Potential Email Address Exposure",
+      "evidence": "Found 1 instance(s) of Email Address",
+      "location": "C:\\Users\\devsh\\OneDrive\\Desktop\\high income potential software sellables\\launch risk intelligense system\\product_2_risk_audit_engine\\tests\\test_site\\users.txt",
+      "timestamp": "2026-01-09T17:26:46.185564"
+    }
+  ]
+}

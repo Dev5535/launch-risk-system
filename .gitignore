@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+*.log
+promotion_log.jsonl
+feedback_log.jsonl
+support_tickets.jsonl
+server.log

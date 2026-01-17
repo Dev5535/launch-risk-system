@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "generated_at": "2026-01-09 17:29:44",
+    "tool": "Product 3 - Compliance Mapper"
+  },
+  "results": {
+    "regulations": [
+      "GDPR"
+    ],
+    "checklist": [
+      {
+        "id": "HIPAA-1",
+        "title": "PHI Encryption",
+        "description": "Protected Health Information must be encrypted at rest and in transit.",
+        "action": "Enable AES-256 for DB and enforce TLS 1.2+.",
+        "priority": "Critical",
+        "regulation": "GDPR"
+      },
+      {
+        "id": "GDPR-1",
+        "title": "Right to be Forgotten",
+        "description": "Users must be able to request deletion of all their data.",
+        "action": "Implement a 'Delete Account' feature that wipes database records.",
+        "priority": "High",
+        "regulation": "GDPR"
+      },
+      {
+        "id": "GDPR-3",
+        "title": "Consent Management",
+        "description": "Health Insurance Portability and Accountability Act (US)",
+        "action": "Add a cookie banner with 'Reject All' option.",
+        "priority": "High",
+        "HIPAA": "",
+        "triggers": "",
+        "industry": "[Healthcare]",
+        "data_types": "[Health]",
+        "requirements": "",
+        "regulation": "GDPR"
+      },
+      {
+        "id": "HIPAA-2",
+        "title": "Access Logging",
+        "description": "Service Organization Control 2",
+        "action": "Implement comprehensive audit logs for all data access.",
+        "priority": "High",
+        "SOC2": "",
+        "triggers": "",
+        "industry": "[SaaS, Finance, B2B]",
+        "requirements": "",
+        "regulation": "GDPR"
+      },
+      {
+        "id": "SOC2-2",
+        "title": "Change Management",
+        "description": "Information Security Management",
+        "action": "Enforce Pull Request reviews and CI/CD pipelines.",
+        "priority": "High",
+        "ISO27001": "",
+        "triggers": "",
+        "industry": "[Enterprise, Finance, Government]",
+        "requirements": "",
+        "regulation": "GDPR"
+      },
+      {
+        "id": "ISO-2",
+        "title": "Access Control Policy",
+        "description": "Limit access to information and information processing facilities.",
+        "action": "Implement Role-Based Access Control (RBAC).",
+        "priority": "High",
+        "regulation": "GDPR"
+      },
+      {
+        "id": "GDPR-2",
+        "title": "Data Portability",
+        "description": "Users must be able to download their data.",
+        "action": "Build a 'Export Data' function (JSON/CSV download).",
+        "priority": "Medium",
+        "regulation": "GDPR"
+      },
+      {
+        "id": "SOC2-1",
+        "title": "Incident Response Plan",
+        "description": "Documented procedure for security incidents.",
+        "action": "Create and test an Incident Response Plan.",
+        "priority": "Medium",
+        "regulation": "GDPR"
+      },
+      {
+        "id": "ISO-1",
+        "title": "Asset Inventory",
+        "description": "Maintain an inventory of all information assets.",
+        "action": "Create a dynamic list of all servers, DBs, and repositories.",
+        "priority": "Low",
+        "regulation": "GDPR"
+      }
+    ]
+  }
+}

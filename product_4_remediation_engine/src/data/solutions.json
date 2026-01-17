@@ -1,0 +1,58 @@
+{
+  "DRIFT-FILE-MISSING": {
+    "title": "File Missing in Production",
+    "type": "command",
+    "lang": "bash",
+    "content": "# Copy the missing file from staging to production\ncp {{staging_path}} {{prod_path}}\n# Verify permissions\nchmod 644 {{prod_path}}\n"
+  },
+  "DRIFT-CONTENT-MISMATCH": {
+    "title": "Content Mismatch Detected",
+    "type": "instruction",
+    "content": "1. Diff the files to see specific changes:\n   diff {{staging_path}} {{prod_path}}\n2. If Staging is the source of truth, overwrite Production:\n   cp {{staging_path}} {{prod_path}}\n3. Restart the service if this is a config file.\n"
+  },
+  "SEO-MISSING-TITLE": {
+    "title": "Missing Page Title",
+    "type": "code",
+    "lang": "html",
+    "content": "<head>\n  <title>Your Descriptive Page Title Here</title>\n</head>\n"
+  },
+  "SEC-AWS-KEY": {
+    "title": "AWS Access Key Exposed",
+    "type": "workflow",
+    "content": "URGENT ACTION REQUIRED:\n1. Log into AWS IAM Console immediately.\n2. Deactivate the exposed Access Key ID: {{match_content}}\n3. Delete the key after verifying no critical services break (or rotate immediately).\n4. Scan your git history to remove the secret:\n   git filter-branch --force --index-filter \"git rm --cached --ignore-unmatch {{file_path}}\" --prune-empty --tag-name-filter cat -- --all\n5. Force push changes (Be careful with shared branches).\n"
+  },
+  "PII-EMAIL-EXPOSED": {
+    "title": "Potential Email Leak in Code",
+    "type": "instruction",
+    "content": "Hardcoded email addresses are a privacy risk and spam magnet.\nAction: Move '{{match_content}}' to an environment variable or database configuration.\n"
+  },
+  "GDPR-1": {
+    "title": "Implement 'Right to be Forgotten'",
+    "type": "code",
+    "lang": "python",
+    "content": "# Example Flask/SQLAlchemy implementation\n@app.route('/api/user/delete', methods=['POST'])\ndef delete_user():\n    user_id = current_user.id\n    # Anonymize instead of hard delete if audit logs are needed\n    user = User.query.get(user_id)\n    user.email = f\"deleted_{user.id}@anonymized.com\"\n    user.name = \"Deleted User\"\n    user.data = None\n    db.session.commit()\n    return jsonify({\"status\": \"User data anonymized\"}), 200\n"
+  },
+  "HIPAA-1": {
+    "title": "Enforce Encryption (At Rest/Transit)",
+    "type": "config",
+    "lang": "yaml",
+    "content": "# Database Configuration (Example for Postgres/RDS)\nstorage_encrypted: true\nkms_key_id: \"arn:aws:kms:us-east-1:123456789012:key/...\"\n\n# Web Server (Nginx) - Force TLS 1.2+\nssl_protocols TLSv1.2 TLSv1.3;\nssl_ciphers HIGH:!aNULL:!MD5;\n"
+  },
+  "SOC2-2": {
+    "title": "Enforce Pull Request Reviews",
+    "type": "instruction",
+    "content": "1. Go to GitHub/GitLab Repository Settings.\n2. Select \"Branches\" -> \"Branch Protection Rules\".\n3. Check \"Require pull request reviews before merging\".\n4. Set \"Required approving reviews\" to at least 1.\n"
+  },
+  "TEMPLATE-S3-PUBLIC": {
+    "title": "Block Public Access (S3 Bucket)",
+    "type": "code",
+    "lang": "json",
+    "content": "{\n  \"Version\": \"2012-10-17\",\n  \"Statement\": [\n    {\n      \"Sid\": \"PublicReadGetObject\",\n      \"Effect\": \"Deny\",\n      \"Principal\": \"*\",\n      \"Action\": \"s3:GetObject\",\n      \"Resource\": \"arn:aws:s3:::YOUR-BUCKET-NAME/*\"\n    }\n  ]\n}\n"
+  },
+  "TEMPLATE-NGINX-SECURE": {
+    "title": "Secure Nginx Headers",
+    "type": "code",
+    "lang": "nginx",
+    "content": "add_header X-Frame-Options \"SAMEORIGIN\";\nadd_header X-XSS-Protection \"1; mode=block\";\nadd_header X-Content-Type-Options \"nosniff\";\nadd_header Referrer-Policy \"strict-origin-when-cross-origin\";\nadd_header Content-Security-Policy \"default-src 'self'; script-src 'self' 'unsafe-inline';\";\n"
+  }
+}
